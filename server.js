@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const database = require("./config/database");
@@ -7,8 +6,15 @@ const base = require("./routes/base");
 
 dotenv.config();
 const app = express();
+
+// middleware
+const corsOptions = {
+    origin: '*', 
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Authorization,Content-Type',
+};
+app.use(cors(corsOptions));
 app.use(express.json());
-app.use(cors());
 
 // port fixed
 const PORT = process.env.PORT || 1800;
@@ -17,8 +23,7 @@ const PORT = process.env.PORT || 1800;
 database.connect();
 
 // routes
-app.use("/api/auth", require("./routes/authRoute"));
-app.use("/api/flashcards", require("./routes/flashcardRoute"));
+app.use("/api/v1", base);
 
 app.listen(PORT, () => {
     console.log(`Flashcard server is running on ${PORT}`);
