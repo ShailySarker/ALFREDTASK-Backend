@@ -17,7 +17,8 @@ const PORT = process.env.PORT || 1800;
 database.connect();
 
 // routes
-// app.use("/api/v1", base);
+app.use("/api/auth", require("./routes/authRoute"));
+app.use("/api/flashcards", require("./routes/flashcardRoute"));
 
 app.listen(PORT, () => {
     console.log(`Flashcard server is running on ${PORT}`);
