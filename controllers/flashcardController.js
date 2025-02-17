@@ -13,7 +13,7 @@ const createFlashcard = async (req, res) => {
     const validatedBody = await createFlashcardSchemaValidator.validateAsync(req.body);
     const { question, answer } = validatedBody;
     const newCard = await Flashcard.create({ question, answer, userId: req.user.id });
-    res.json({ data: newCard, message: "Flashcard deleted successfully" });
+    res.json({ data: newCard, message: "Flashcard created successfully" });
 };
 // #################  Update flashcard #################
 const updateFlashcard = async (req, res) => {

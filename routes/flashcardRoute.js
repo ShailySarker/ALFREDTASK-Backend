@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const flashcardController = require("../controllers/flashcardController");
+const { verifyUser } = require("../middleware/authMiddleware");
 
 router.get("/", verifyUser, flashcardController.getFlashcard);
 router.post("/", verifyUser, flashcardController.createFlashcard);
